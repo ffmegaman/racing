@@ -6,8 +6,6 @@
   var distraction, peterMove, rafaelMove, peterAction, rafaelAction;
   var endDistance = 100;
   var confirmation;
-  var peterCurrentTotal = 0;
-  var rafaelCurrentTotal = 0;
   var turn = 0;
   var finishLine = false;
 
@@ -16,9 +14,12 @@
     this.name = name;
     this.speed = speed;
     this.focus = focus;
-    this.position = 0;
+    this.currentMiles = 0;
   }
 
+  peter = new Animal("Peter", 6, 4);
+
+  rafael = new Animal("Rafael", 3, 9);
 
   // =========Experimental User Input of Peter and Rafael's attributes ==========
   //inputRabbitSpeed = prompt("Please input the speed of Peter the rabbit.");
@@ -27,10 +28,6 @@
   //inputTurtleFocus = prompt("Please input the focus of Rafael the turtle.");
   //peter = new Animal("Peter", parseInt(inputRabbitSpeed), parseInt(inputRabbitFocus));
   //rafael = new Animal("Rafael", parseInt(inputTurtleSpeed), parseInt(inputTurtleFocus));
-
-  peter = new Animal("Peter", 6, 4);
-
-  rafael = new Animal("Rafael", 3, 9);
 
   confirmation = confirm("The distance to the goal line is 100 miles. Peter, the rabbit, and Rafael, the turtle, are set! Start simulation?");
 
@@ -61,23 +58,23 @@
         rafaelAction = "Rafael moved ";
       }
 
-      peterCurrentTotal += peterMove;
-      rafaelCurrentTotal += rafaelMove;
+      peter.currentMiles += peterMove;
+      rafael.currentMiles += rafaelMove;
       turn += 1;
 
       confirmation = confirm("Turn " + turn + "\n\n"
-        + peterAction + peterMove + " miles for a total of " + peterCurrentTotal +
+        + peterAction + peterMove + " miles for a total of " + peter.currentMiles +
         " miles." + "\n\n"
-        + rafaelAction + rafaelMove + " miles for a total of " + rafaelCurrentTotal + " miles. \n\nContinue?")
+        + rafaelAction + rafaelMove + " miles for a total of " + rafael.currentMiles + " miles. \n\nContinue?")
 
       //finish game if peter crosses the finishLine
-      if (peterCurrentTotal >= endDistance) {
+      if (peter.currentMiles >= endDistance) {
         alert("Peter won!");
         finishLine = true;
       }
 
       //finish game if rafael crosses the finishline.
-      else if (rafaelCurrentTotal >= endDistance) {
+      else if (rafael.currentMiles >= endDistance) {
         alert("Rafael won!");
         finishLine = true;
       };
